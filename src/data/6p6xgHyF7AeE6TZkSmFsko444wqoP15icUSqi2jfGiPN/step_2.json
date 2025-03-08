@@ -1,0 +1,73 @@
+{
+  "root": {
+    "address": "5e2qRc1DNEXmyxP8qwPwJhRWjef7usLyi7v5xjqLr5G7",
+    "children": [
+      {
+        "address": "8tKLhRyFC3RsQ41APTqKdzr9DdeGqV2RtRgSjVgsY4xb",
+        "children": [
+          {
+            "address": "A8nPhpCJqtqHdqUk35Uj9Hy2YsGXFkCZGuNwvkD3k7VC",
+            "children": []
+          }
+        ]
+      },
+      {
+        "address": "2Fe47zbh8svDNGNehFy1NY8bsjQNtomvKFuq1jNgWSkv",
+        "children": [
+          {
+            "address": "G1CiXnrvNhhX4PvnRUxiJq3zefLqFbkRM9RPZwxfGLJ2",
+            "children": []
+          },
+          {
+            "address": "CsVe97sDiaXkVfVjiwyYp4zKZXD7TckaRcLVgqbFuUay",
+            "children": []
+          },
+          {
+            "address": "A8nPhpCJqtqHdqUk35Uj9Hy2YsGXFkCZGuNwvkD3k7VC",
+            "children": []
+          }
+        ]
+      },
+      {
+        "address": "7qtDv72fGzuuGmyg1FkTxBybYH2sXkUd6u8WXwnkRnpE",
+        "children": [
+          {
+            "address": "G1CiXnrvNhhX4PvnRUxiJq3zefLqFbkRM9RPZwxfGLJ2",
+            "children": []
+          },
+          {
+            "address": "F3KRvufPzg5mxVtJfbTk1euzH4dQrSE62dwQzawTdJvd",
+            "children": []
+          },
+          {
+            "address": "DNYPEk2sEqfHpefATZ67jSuVN1XuLiEMuxyrurVHXyR1",
+            "children": []
+          },
+          {
+            "address": "ChXVG6reFzkwgZH1Bkrh6xAtUZWcssSEMBS8BWPAvtnv",
+            "children": []
+          },
+          {
+            "address": "A8nPhpCJqtqHdqUk35Uj9Hy2YsGXFkCZGuNwvkD3k7VC",
+            "children": []
+          }
+        ]
+      },
+      {
+        "address": "2RH6rUTPBJ9rUDPpuV9b8z1YL56k1tYU6Uk5ZoaEFFSK",
+        "children": []
+      }
+    ]
+  },
+  "frontier": [
+    "A8nPhpCJqtqHdqUk35Uj9Hy2YsGXFkCZGuNwvkD3k7VC",
+    "G1CiXnrvNhhX4PvnRUxiJq3zefLqFbkRM9RPZwxfGLJ2",
+    "CsVe97sDiaXkVfVjiwyYp4zKZXD7TckaRcLVgqbFuUay",
+    "A8nPhpCJqtqHdqUk35Uj9Hy2YsGXFkCZGuNwvkD3k7VC",
+    "G1CiXnrvNhhX4PvnRUxiJq3zefLqFbkRM9RPZwxfGLJ2",
+    "F3KRvufPzg5mxVtJfbTk1euzH4dQrSE62dwQzawTdJvd",
+    "DNYPEk2sEqfHpefATZ67jSuVN1XuLiEMuxyrurVHXyR1",
+    "ChXVG6reFzkwgZH1Bkrh6xAtUZWcssSEMBS8BWPAvtnv",
+    "A8nPhpCJqtqHdqUk35Uj9Hy2YsGXFkCZGuNwvkD3k7VC"
+  ]
+}

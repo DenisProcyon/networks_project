@@ -1,0 +1,29 @@
+{
+  "root": {
+    "address": "5e2qRc1DNEXmyxP8qwPwJhRWjef7usLyi7v5xjqLr5G7",
+    "children": [
+      {
+        "address": "8tKLhRyFC3RsQ41APTqKdzr9DdeGqV2RtRgSjVgsY4xb",
+        "children": []
+      },
+      {
+        "address": "2Fe47zbh8svDNGNehFy1NY8bsjQNtomvKFuq1jNgWSkv",
+        "children": []
+      },
+      {
+        "address": "7qtDv72fGzuuGmyg1FkTxBybYH2sXkUd6u8WXwnkRnpE",
+        "children": []
+      },
+      {
+        "address": "2RH6rUTPBJ9rUDPpuV9b8z1YL56k1tYU6Uk5ZoaEFFSK",
+        "children": []
+      }
+    ]
+  },
+  "frontier": [
+    "8tKLhRyFC3RsQ41APTqKdzr9DdeGqV2RtRgSjVgsY4xb",
+    "2Fe47zbh8svDNGNehFy1NY8bsjQNtomvKFuq1jNgWSkv",
+    "7qtDv72fGzuuGmyg1FkTxBybYH2sXkUd6u8WXwnkRnpE",
+    "2RH6rUTPBJ9rUDPpuV9b8z1YL56k1tYU6Uk5ZoaEFFSK"
+  ]
+}

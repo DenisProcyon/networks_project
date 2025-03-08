@@ -1,0 +1,19 @@
+{
+  "root": {
+    "address": "JUPhop9E8ZfdJ5FNHhxQt4uAih822Vs4QpqsWcewFbq",
+    "children": [
+      {
+        "address": "EXJHiMkj6NRFDfhWBMKccHNwdSpCT7tdvQeRf87yHm6T",
+        "children": []
+      },
+      {
+        "address": "61aq585V8cR2sZBeawJFt2NPqmN7zDi1sws4KLs5xHXV",
+        "children": []
+      }
+    ]
+  },
+  "frontier": [
+    "EXJHiMkj6NRFDfhWBMKccHNwdSpCT7tdvQeRf87yHm6T",
+    "61aq585V8cR2sZBeawJFt2NPqmN7zDi1sws4KLs5xHXV"
+  ]
+}
