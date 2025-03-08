@@ -103,7 +103,7 @@ def get_root_from_local(filename: str) -> dict[AccountNode]:
     print(f'No {filename} file found')
 
 if __name__ == "__main__":
-    TOKEN = "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P"
+    TOKEN = "5d2TbDMFmnH3BzwGtGQ2nAmq2ysLu3YCCrT5ftf6moon"
     MAX_STEPS = 4
     
     file = f'{TOKEN}_{MAX_STEPS}.json'
