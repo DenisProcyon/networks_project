@@ -19,46 +19,82 @@ HEADERS = {
 
 class TokenScraper:
     """
-    This class scrapes token data from the solscan API.
-    it fetches basic metadata such as the minter, mint time, name, and image link.
+    Scrapes token data from Solscan API. If the API call fails,
+    we fallback to local step_0.json for the minter address,
+    skipping the rest of the metadata (minting_time, name, image, etc.)
     """
-    def __init__(self, token: Token) -> None:
+
+    def __init__(self, token: Token, steps_folder: str = None) -> None:
         """
-        Initializes the token scraper with a given token.
+        :param token: объект Token, в котором уже есть .address
+        :param steps_folder: локальная папка для step_0.json и прочих step_N.json
         """
         self.token = token
+        self.steps_folder = steps_folder
         self.gather_minting_data()
 
     def get_token_data(self) -> Token:
-        """
-        Returns the token object containing all fetched metadata.
-        """
         return self.token
 
     def gather_minting_data(self) -> None:
         """
-        Sends a request to the solscan API to retrieve token metadata,
-        then fills in the token object's fields like minter, minting time, etc.
+        1) Пытается получить данные по адресу токена через Solscan API.
+        2) Если не удаётся - читает локальный файл step_0.json и берёт минтера оттуда.
         """
         request_url = f'https://pro-api.solscan.io/v2.0/token/meta?address={self.token.address}'
         
-        token_meta_response = requests.get(request_url, headers=HEADERS)
-        if token_meta_response.status_code == 200:
-            data = token_meta_response.json()["data"]
+        try:
+            resp = requests.get(request_url, headers=HEADERS, timeout=10)
+            
+            if resp.status_code == 200:
+                data = resp.json()["data"]
+                self.token.minter = data["creator"]
+                self.token.minting_time = data["created_time"]
+                self.token.name = data["metadata"]["name"]
+                self.token.image_link = data["metadata"]["image"]
+                
+                print(f'Got minting data for token {self.token.address[:6]}... = {self.token.name}')
+                return
+            else:
+                # Если код != 200, переходим на fallback
+                print(f"[WARN] Solscan response code = {resp.status_code}. Fallback to local.")
+                self._fallback_local_step0()
 
-            self.token.minter = data["creator"]
-            self.token.minting_time = data["created_time"]
-            self.token.name = data["metadata"]["name"]
-            self.token.image_link = data["metadata"]["image"]
+        except Exception as e:
+            print(f"[ERROR] Exception in gather_minting_data: {e}. Fallback to local.")
+            self._fallback_local_step0()
 
-            print(f'Got minting data for token {self.token.name}')
+    def _fallback_local_step0(self) -> None:
+        """
+        Если не удалось получить данные по API,
+        смотрим локальный файл step_0.json в steps_folder.
+        Берём оттуда корневой узел, его address = self.token.minter,
+        и пропускаем прочие метаданные (minting_time, image, etc).
+        """
+        if not self.steps_folder:
+            print("[ERROR] steps_folder is not set, cannot fallback to local step_0.json")
             return
-        
-        raise ConnectionError(
-            f'Can not scrape token {self.token.address[:5]}... data. '
-            f'Response: {token_meta_response.status_code}'
-        )
 
+        step0_file = self.steps_folder / "step_0.json"
+        if not step0_file.exists():
+            print(f"[WARN] No step_0.json in {self.steps_folder}, cannot fallback. Minter unknown.")
+            return
+
+        try:
+            with open(step0_file, encoding="utf-8") as f:
+                data = json.load(f)
+            root_data = data["root"]      # сериализованное дерево (AccountNode)
+            # frontier_data = data["frontier"]  # при желании тоже можно считать
+
+            root_node = deserialize_graph(root_data)
+            self.token.minter = root_node.address
+            self.token.minting_time = 0        # или None
+            self.token.name = f"Unknown_{self.token.address[:4]}"
+            self.token.image_link = ""         # пустая строка
+            print(f"[FALLBACK] Minter address = {self.token.minter} from step_0.json.")
+        
+        except Exception as e:
+            print(f"[ERROR] Failed to read or parse step_0.json: {e}.")
 
 class MinterTransferScraper:
     """
