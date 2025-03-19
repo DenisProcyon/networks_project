@@ -1,0 +1,14 @@
+{
+  "root": {
+    "address": "7saaoYgoGfWzePRZFhEo8UsHz7zcXri3NTaDC4sydFaT",
+    "children": [
+      {
+        "address": "8dmwPjjvbYvpqTCLY2cT7aMJqVcGEGcn3TFFStn4nXra",
+        "children": []
+      }
+    ]
+  },
+  "frontier": [
+    "8dmwPjjvbYvpqTCLY2cT7aMJqVcGEGcn3TFFStn4nXra"
+  ]
+}
