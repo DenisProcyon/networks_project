@@ -37,10 +37,6 @@ class TokenScraper:
         return self.token
 
     def gather_minting_data(self) -> None:
-        """
-        1) Пытается получить данные по адресу токена через Solscan API.
-        2) Если не удаётся - читает локальный файл step_0.json и берёт минтера оттуда.
-        """
         request_url = f'https://pro-api.solscan.io/v2.0/token/meta?address={self.token.address}'
         
         try:
@@ -56,7 +52,6 @@ class TokenScraper:
                 print(f'Got minting data for token {self.token.address[:6]}... = {self.token.name}')
                 return
             else:
-                # Если код != 200, переходим на fallback
                 print(f"[WARN] Solscan response code = {resp.status_code}. Fallback to local.")
                 self._fallback_local_step0()
 
@@ -65,12 +60,6 @@ class TokenScraper:
             self._fallback_local_step0()
 
     def _fallback_local_step0(self) -> None:
-        """
-        Если не удалось получить данные по API,
-        смотрим локальный файл step_0.json в steps_folder.
-        Берём оттуда корневой узел, его address = self.token.minter,
-        и пропускаем прочие метаданные (minting_time, image, etc).
-        """
         if not self.steps_folder:
             print("[ERROR] steps_folder is not set, cannot fallback to local step_0.json")
             return
@@ -83,14 +72,13 @@ class TokenScraper:
         try:
             with open(step0_file, encoding="utf-8") as f:
                 data = json.load(f)
-            root_data = data["root"]      # сериализованное дерево (AccountNode)
-            # frontier_data = data["frontier"]  # при желании тоже можно считать
+            root_data = data["root"]  
 
             root_node = deserialize_graph(root_data)
             self.token.minter = root_node.address
-            self.token.minting_time = 0        # или None
+            self.token.minting_time = 0   
             self.token.name = f"Unknown_{self.token.address[:4]}"
-            self.token.image_link = ""         # пустая строка
+            self.token.image_link = ""   
             print(f"[FALLBACK] Minter address = {self.token.minter} from step_0.json.")
         
         except Exception as e:
